@@ -1,5 +1,6 @@
 //Outter
 import { render } from 'react-dom';
+import 'typeface-roboto';
 
 //Inner
 import { App } from './App';

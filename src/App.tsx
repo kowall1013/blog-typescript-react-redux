@@ -1,15 +1,35 @@
 //Outter
 import { Provider } from 'react-redux';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 //Inner
 import { store } from './state';
-import { ArticlesList } from './components';
+import { Start, Blog, Podcast, About } from './pages';
+import { Header, Navigation } from './components';
 
 export function App() {
   return (
-    <Provider store={store}>
-      <ArticlesList />
-    </Provider>
+    <Router>
+      <Header>
+        <Navigation />
+      </Header>
+      <Provider store={store}>
+        <Switch>
+          <Route exact path="/">
+            <Start />
+          </Route>
+          <Route exact path="/blog">
+            <Blog />
+          </Route>
+          <Route exact path="/podcast">
+            <Podcast />
+          </Route>
+          <Route exact path="/about">
+            <About />
+          </Route>
+        </Switch>
+      </Provider>
+    </Router>
   );
 }
 
