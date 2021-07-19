@@ -1,10 +1,11 @@
 //Outter
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import { useEffect } from 'react';
 
 //Inner
 import { useTypedSelector } from '../../../../../hooks/useTypedSelectors';
 import { useActions } from '../../../../../hooks/useActions';
+import { UserComment } from '../../../../../components';
 
 //Styled and icons
 import { Wrapper } from './ArticleDetails.css';
@@ -32,38 +33,53 @@ const imageIndex = (): number => {
   return Math.floor(Math.random() * 3);
 };
 
-export const ArticleDetails: React.FC = (props) => {
+export const ArticleDetails = () => {
   const params: Params = useParams();
-  const { fetchArticles } = useActions();
+  const history = useHistory();
+  const { fetchArticles, fetchComment } = useActions();
   const articles = useTypedSelector((state) => state.articles.posts);
+  const comments = useTypedSelector((state) => state.comments.comments);
 
+  //ID query params
   const id = Number(params.id);
 
   //Filter 1 article from list
-  const article: Article | undefined = articles.find((article) => article.id === id);
+  const article = articles?.find((article) => article.id === id);
 
+  //Index to randomly select image
   const imgIndex = imageIndex();
+
   useEffect(() => {
     fetchArticles();
+    fetchComment(id);
   }, []);
 
+  const handlePreviousClick = () => {
+    history.goBack();
+  };
+
   return (
-    <>
-      <Wrapper>
-        <div className="content_image">
-          <img src={images[imgIndex]} alt="" />
-        </div>
-        <h1 className="content_title">{article?.title}</h1>
-        <div className="content_meta">
-          <MdDateRange />
-          <span>July 8, 2021</span>
-          <FaRegComments />
-          <span>3</span>
-        </div>
-        <div className="content_description">{article?.body}</div>
-        <div className="content_comments"></div>
-      </Wrapper>
-      <Wrapper></Wrapper>
-    </>
+    <Wrapper>
+      <div className="content_image">
+        <img src={images[imgIndex]} alt="" />
+      </div>
+      <h1 className="content_title">{article?.title}</h1>
+      <div className="content_meta">
+        <MdDateRange />
+        <span>July 8, 2021</span>
+        <FaRegComments />
+        <span>3</span>
+      </div>
+      <div className="content_description">{article?.body}</div>
+      <div className="content_comments">
+        <h2>Comments</h2>
+        {comments.map((comment) => (
+          <UserComment key={comment.id} body={comment.body} email={comment.email} name={comment.name} />
+        ))}
+      </div>
+      <button className="content_previous" onClick={handlePreviousClick}>
+        Previous Page
+      </button>
+    </Wrapper>
   );
 };

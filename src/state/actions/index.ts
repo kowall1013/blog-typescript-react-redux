@@ -1,6 +1,6 @@
 //Inner
 import { ActionType } from '../action-types';
-import { Posts } from '../reducers/articlesReducer';
+import { Posts, Post } from '../reducers/articlesReducer';
 
 interface FetchArticlesAction {
   type: ActionType.FETCH_ARTICLES;
@@ -16,4 +16,24 @@ interface FetchArticlesErrorAction {
   payload: string;
 }
 
-export type Action = FetchArticlesAction | FetchArticlesSuccessAction | FetchArticlesErrorAction;
+interface FetchCommentAction {
+  type: ActionType.FETCH_COMMENT;
+}
+
+interface FetchCommentSuccessAction {
+  type: ActionType.FETCH_COMMENT_SUCCESS;
+  payload: Post[];
+}
+
+interface FetchCommentErrorAction {
+  type: ActionType.FETCH_COMMENT_ERROR;
+  payload: string;
+}
+
+export type Action =
+  | FetchArticlesAction
+  | FetchArticlesSuccessAction
+  | FetchArticlesErrorAction
+  | FetchCommentAction
+  | FetchCommentSuccessAction
+  | FetchCommentErrorAction;

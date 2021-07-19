@@ -27,3 +27,26 @@ export const fetchArticles = () => {
     }
   };
 };
+
+export const fetchComment = (id: number) => {
+  return async (dispatch: Dispatch<Action>) => {
+    dispatch({
+      type: ActionType.FETCH_COMMENT,
+    });
+
+    try {
+      const response = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}/comments`);
+      const data = await response.json();
+
+      dispatch({
+        type: ActionType.FETCH_COMMENT_SUCCESS,
+        payload: data,
+      });
+    } catch (error) {
+      dispatch({
+        type: ActionType.FETCH_COMMENT_ERROR,
+        payload: error.message,
+      });
+    }
+  };
+};

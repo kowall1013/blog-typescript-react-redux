@@ -2,14 +2,7 @@
 import { ActionType } from '../action-types';
 import { Action } from '../actions';
 
-export interface Posts {
-  userId: number;
-  id: number;
-  title: string;
-  body: string;
-}
-
-export interface Post {
+export interface Comment {
   postId: number;
   id: number;
   name: string;
@@ -20,33 +13,33 @@ export interface Post {
 interface ArticlesState {
   loading: boolean;
   error: string | null;
-  posts: Posts[];
+  comments: Comment[];
 }
 
 const initialState = {
   loading: false,
   error: null,
-  posts: [],
+  comments: [],
 };
 
 const reducer = (state: ArticlesState = initialState, action: Action) => {
   switch (action.type) {
-    case ActionType.FETCH_ARTICLES:
+    case ActionType.FETCH_COMMENT:
       return {
         ...state,
         loading: true,
       };
-    case ActionType.FETCH_ARTICLES_SUCCESS:
+    case ActionType.FETCH_COMMENT_SUCCESS:
       return {
         loading: false,
         error: null,
-        posts: action.payload,
+        comments: action.payload,
       };
-    case ActionType.FETCH_ARTICLES_ERROR:
+    case ActionType.FETCH_COMMENT_ERROR:
       return {
         loading: false,
         error: action.payload,
-        posts: [],
+        comments: [],
       };
 
     default:

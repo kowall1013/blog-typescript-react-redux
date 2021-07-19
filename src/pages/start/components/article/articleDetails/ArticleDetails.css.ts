@@ -33,4 +33,19 @@ export const Wrapper = styled.div`
     word-break: break-all;
     margin-bottom: ${({ theme }) => theme.margin.m}em;
   }
+
+  .content_comments {
+    text-align: center;
+    margin-top: ${({ theme }) => theme.margin.l * 3}em;
+    margin-bottom: ${({ theme }) => theme.margin.l * 3}em;
+  }
+
+  .content_previous {
+    background-color: transparent;
+    border: none;
+    background-color: ${({ theme }) => theme.colors.green.normal};
+    padding: ${({ theme }) => theme.padding.xs * 2}em ${({ theme }) => theme.padding.m * 2}em;
+    border-radius: ${({ theme }) => theme.borderRadius};
+    cursor: pointer;
+  }
 `;
