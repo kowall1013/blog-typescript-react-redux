@@ -30,10 +30,16 @@ interface FetchCommentErrorAction {
   payload: string;
 }
 
+interface AddCommentToFavourite {
+  type: ActionType.ADD_COMMENT_TO_FAVOURITE;
+  payload: Post[];
+}
+
 export type Action =
   | FetchArticlesAction
   | FetchArticlesSuccessAction
   | FetchArticlesErrorAction
   | FetchCommentAction
   | FetchCommentSuccessAction
-  | FetchCommentErrorAction;
+  | FetchCommentErrorAction
+  | AddCommentToFavourite;

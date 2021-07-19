@@ -3,6 +3,10 @@ import { useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+//Inner
+import { useActions } from '../../hooks/useActions';
+import { useTypedSelector } from '../../hooks/useTypedSelectors';
+
 //Styles and Icons
 import { Wrapper } from './UserComment.css';
 import { AiFillStar } from 'react-icons/ai';
@@ -16,9 +20,13 @@ interface Props {
 
 export const UserComment = ({ body, email, name }: Props) => {
   const [isFavourite, setIsFavourite] = useState(false);
+  const { AddCommentToFavourite } = useActions();
+  const state = useTypedSelector((state) => state);
+  console.log('madafacuka', state);
   const handleClick = () => {
     setIsFavourite(!isFavourite);
     isFavourite ? toast.dark('Delete from favourite') : toast.success('Add to favourite');
+    AddCommentToFavourite({ body, email, name });
   };
   return (
     <Wrapper>

@@ -4,6 +4,7 @@ import { Dispatch } from 'redux';
 //Inner
 import { ActionType } from '../action-types';
 import { Action } from '../actions';
+import { Comment } from '../reducers/commentsReducer';
 
 export const fetchArticles = () => {
   return async (dispatch: Dispatch<Action>) => {
@@ -48,5 +49,12 @@ export const fetchComment = (id: number) => {
         payload: error.message,
       });
     }
+  };
+};
+
+export const AddCommentToFavourite = (comment: Comment) => {
+  return {
+    type: ActionType.ADD_COMMENT_TO_FAVOURITE,
+    payload: comment,
   };
 };
