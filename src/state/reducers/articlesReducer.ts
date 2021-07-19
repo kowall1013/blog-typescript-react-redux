@@ -12,13 +12,13 @@ export interface Posts {
 interface ArticlesState {
   loading: boolean;
   error: string | null;
-  articles: Posts[];
+  posts: Posts[];
 }
 
 const initialState = {
   loading: false,
   error: null,
-  articles: [],
+  posts: [],
 };
 
 const reducer = (state: ArticlesState = initialState, action: Action) => {
@@ -32,13 +32,13 @@ const reducer = (state: ArticlesState = initialState, action: Action) => {
       return {
         loading: false,
         error: null,
-        articles: action.payload,
+        posts: action.payload,
       };
     case ActionType.FETCH_ARTICLES_ERROR:
       return {
         loading: false,
         error: action.payload,
-        articles: [],
+        posts: [],
       };
     default:
       return state;

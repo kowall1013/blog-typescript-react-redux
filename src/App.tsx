@@ -11,6 +11,7 @@ import { Header, Navigation, Logo } from './components';
 //Styles
 import GlobalStyle from './App.css';
 import { myTheme } from './utils/theme';
+import { ArticleDetails } from './pages/start/components/article/articleDetails';
 
 export function App() {
   return (
@@ -23,16 +24,19 @@ export function App() {
         </Header>
         <Provider store={store}>
           <Switch>
-            <Route exact path="/">
+            <Route exact path="/posts">
               <Start />
             </Route>
-            <Route exact path="/blog">
+            <Route exact path="/posts/:id">
+              <ArticleDetails />
+            </Route>
+            <Route path="/blog">
               <Blog />
             </Route>
-            <Route exact path="/podcast">
+            <Route path="/podcast">
               <Podcast />
             </Route>
-            <Route exact path="/about">
+            <Route path="/about">
               <About />
             </Route>
           </Switch>

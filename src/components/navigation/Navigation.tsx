@@ -6,7 +6,7 @@ import { Wrapper } from './Navigation.css';
 import { IoMdClose, IoIosMenu } from 'react-icons/io';
 
 const navigationData = [
-  { id: 1, name: 'start here', to: '/' },
+  { id: 1, name: 'start here', to: '/posts' },
   { id: 2, name: 'blog', to: '/blog' },
   { id: 3, name: 'podcast', to: '/podcast' },
   { id: 4, name: 'about', to: '/about' },
