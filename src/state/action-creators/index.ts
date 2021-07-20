@@ -73,3 +73,10 @@ export const addPostToFavourite = (post: Posts) => {
     payload: post,
   };
 };
+
+export const deletePostFromFavourite = (id?: number) => {
+  return {
+    type: ActionType.DELETE_POST_FROM_FAVOURITE,
+    payload: id,
+  };
+};

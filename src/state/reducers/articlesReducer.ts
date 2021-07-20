@@ -53,10 +53,14 @@ const reducer = (state = initialState, action: Action) => {
         favourite: [],
       };
     case ActionType.ADD_POST_TO_FAVOURITE:
-      console.log(state.favourite);
       return {
         ...state,
         favourite: [...state.favourite, action.payload],
+      };
+    case ActionType.DELETE_POST_FROM_FAVOURITE:
+      return {
+        ...state,
+        favourite: state.favourite.filter((post) => post.id !== action.payload),
       };
 
     default:

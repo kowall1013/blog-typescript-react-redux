@@ -6,7 +6,7 @@ import { ToastContainer, toast } from 'react-toastify';
 
 //Inner
 import { useTypedSelector } from '../../../../../hooks/useTypedSelectors';
-import { UserComment } from '../../../../../components';
+import { UserComment, Button } from '../../../../../components';
 import { useActions } from '../../../../../hooks/useActions';
 
 //Styled and icons
@@ -32,15 +32,16 @@ interface Params {
 
 interface Props {
   inFavourite?: boolean;
+  idPost?: number;
 }
 
-export const ArticleDetails = ({ inFavourite }: Props) => {
+export const ArticleDetails = ({ inFavourite, idPost }: Props) => {
   const [isFavouriteCom, setIsFavourite] = useState(false);
 
   const { addPostToFavourite } = useActions();
   const params: Params = useParams();
   const history = useHistory();
-  const { fetchArticles, fetchComment } = useActions();
+  const { fetchArticles, fetchComment, deletePostFromFavourite } = useActions();
   const articles = useTypedSelector((state) => state.articles.posts);
   const comments = useTypedSelector((state) => state.comments.comments);
 
@@ -73,8 +74,12 @@ export const ArticleDetails = ({ inFavourite }: Props) => {
     isFavouriteCom ? toast.dark('Delete from favourite') : toast.success('Add to favourite');
   };
 
+  const handleDeletePost = () => {
+    deletePostFromFavourite(idPost);
+  };
+
   const postInFavourite = inFavourite ? (
-    <button>Delete from Favourite</button>
+    <Button title="Delete from Favourite" onChange={handleDeletePost} />
   ) : (
     <IconContext.Provider value={{ className: 'content_favourite' }}>
       <AiFillStar onClick={handleClick} />

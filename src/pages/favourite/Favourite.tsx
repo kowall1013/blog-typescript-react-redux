@@ -27,7 +27,7 @@ export const Favourite: React.FC = () => {
       <div className="articles">
         <h2>Posts</h2>
         {favPosts.map((post) => (
-          <ArticleDetails key={post.id} inFavourite={true} />
+          <ArticleDetails key={post.id} inFavourite={true} idPost={post.id} />
         ))}
       </div>
     </Wrapper>

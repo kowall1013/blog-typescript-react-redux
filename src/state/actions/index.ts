@@ -46,6 +46,11 @@ interface AddPostToFavourire {
   payload: Posts;
 }
 
+interface deletePostFromFavourite {
+  type: ActionType.DELETE_POST_FROM_FAVOURITE;
+  payload: number;
+}
+
 export type Action =
   | FetchArticlesAction
   | FetchArticlesSuccessAction
@@ -55,4 +60,5 @@ export type Action =
   | FetchCommentErrorAction
   | AddCommentToFavourite
   | DeleteCommentFromFavourite
-  | AddPostToFavourire;
+  | AddPostToFavourire
+  | deletePostFromFavourite;
