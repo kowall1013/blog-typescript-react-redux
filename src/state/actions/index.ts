@@ -43,7 +43,7 @@ interface DeleteCommentFromFavourite {
 
 interface AddPostToFavourire {
   type: ActionType.ADD_POST_TO_FAVOURITE;
-  payload: JSX.Element;
+  payload: Posts;
 }
 
 export type Action =

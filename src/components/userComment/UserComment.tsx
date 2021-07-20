@@ -34,6 +34,7 @@ export const UserComment = ({ body, email, name, inFavourite }: Props) => {
     deleteCommentToFavourite(name);
   };
 
+  //Depending comment is in favourite or not will have a little bit diffrenat functionality
   const commentIsInFavourite = inFavourite ? (
     <IconContext.Provider value={{ className: 'favourite_not' }}>
       <AiFillStar onClick={handleClickFavourite} />

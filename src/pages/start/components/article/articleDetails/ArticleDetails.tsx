@@ -1,11 +1,13 @@
 //Outter
 import { useParams, useHistory } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { IconContext } from 'react-icons';
+import { ToastContainer, toast } from 'react-toastify';
 
 //Inner
 import { useTypedSelector } from '../../../../../hooks/useTypedSelectors';
-import { useActions } from '../../../../../hooks/useActions';
 import { UserComment } from '../../../../../components';
+import { useActions } from '../../../../../hooks/useActions';
 
 //Styled and icons
 import { Wrapper } from './ArticleDetails.css';
@@ -14,10 +16,8 @@ import photo_2 from '../../../../../images/photo_2.jpg';
 import photo_3 from '../../../../../images/photo_3.jpg';
 import { MdDateRange } from 'react-icons/md';
 import { FaRegComments } from 'react-icons/fa';
-
-interface Params {
-  id: string;
-}
+import { AiFillStar } from 'react-icons/ai';
+import 'react-toastify/dist/ReactToastify.css';
 
 //Generating unique images for articles, because Api NOT PROVIDED any images
 const images = [photo_1, photo_2, photo_3];
@@ -26,12 +26,22 @@ const imageIndex = (): number => {
   return Math.floor(Math.random() * 3);
 };
 
-export const ArticleDetails = () => {
+interface Params {
+  id: string;
+}
+
+interface Props {
+  inFavourite?: boolean;
+}
+
+export const ArticleDetails = ({ inFavourite }: Props) => {
+  const [isFavouriteCom, setIsFavourite] = useState(false);
+
+  const { addPostToFavourite } = useActions();
   const params: Params = useParams();
   const history = useHistory();
   const { fetchArticles, fetchComment } = useActions();
   const articles = useTypedSelector((state) => state.articles.posts);
-
   const comments = useTypedSelector((state) => state.comments.comments);
 
   //ID query params
@@ -49,11 +59,31 @@ export const ArticleDetails = () => {
   }, []);
 
   const handlePreviousClick = () => {
-    history.goBack();
+    history.push('/');
   };
+
+  const handleClick = () => {
+    setIsFavourite(!isFavouriteCom);
+    addPostToFavourite({
+      title: article?.title,
+      body: article?.body,
+      id: article?.id,
+      userId: article?.userId,
+    });
+    isFavouriteCom ? toast.dark('Delete from favourite') : toast.success('Add to favourite');
+  };
+
+  const postInFavourite = inFavourite ? (
+    <button>Delete from Favourite</button>
+  ) : (
+    <IconContext.Provider value={{ className: 'content_favourite' }}>
+      <AiFillStar onClick={handleClick} />
+    </IconContext.Provider>
+  );
 
   return (
     <Wrapper>
+      {postInFavourite}
       <div className="content_image">
         <img src={images[imgIndex]} alt="" />
       </div>
@@ -72,8 +102,9 @@ export const ArticleDetails = () => {
         ))}
       </div>
       <button className="content_previous" onClick={handlePreviousClick}>
-        Previous Page
+        {inFavourite ? 'Go to Home Page' : 'Previous page'}
       </button>
+      <ToastContainer position="bottom-left" hideProgressBar={true} />
     </Wrapper>
   );
 };

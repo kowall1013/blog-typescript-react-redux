@@ -13,10 +13,10 @@ import { BsArrowRight } from 'react-icons/bs';
 
 interface Props {
   item: {
-    body: string;
-    id: number;
-    title: string;
-    userId: number;
+    body?: string;
+    id?: number;
+    title?: string;
+    userId?: number;
   };
 }
 
@@ -28,9 +28,9 @@ const imageIndex = (): number => {
 };
 
 export const Article: React.FC<Props> = ({ item }) => {
-  const { body, id, title, userId } = item;
+  const { body, id, title } = item;
   const imgIndex = imageIndex();
-  const maxChar = body.slice(0, 100);
+  const maxChar = body?.slice(0, 100);
 
   return (
     <IconContext.Provider value={{ style: { verticalAlign: 'middle' } }}>
@@ -46,6 +46,7 @@ export const Article: React.FC<Props> = ({ item }) => {
           <span>3</span>
         </div>
         <div className="content_description">{maxChar}...</div>
+
         <Link to={`/posts/${id}`} className="content_readmore">
           <span>READ MORE</span>
           <BsArrowRight />

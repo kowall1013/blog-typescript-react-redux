@@ -48,4 +48,10 @@ export const Wrapper = styled.div`
     border-radius: ${({ theme }) => theme.borderRadius};
     cursor: pointer;
   }
+
+  .content_favourite {
+    font-size: ${({ theme }) => theme.fontSize.m}em;
+    cursor: pointer;
+    color: ${({ theme }) => theme.colors.gray.normal};
+  }
 `;

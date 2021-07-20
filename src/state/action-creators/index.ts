@@ -5,6 +5,7 @@ import { Dispatch } from 'redux';
 import { ActionType } from '../action-types';
 import { Action } from '../actions';
 import { Comment } from '../reducers/commentsReducer';
+import { Posts } from '../reducers/articlesReducer';
 
 export const fetchArticles = () => {
   return async (dispatch: Dispatch<Action>) => {
@@ -66,9 +67,9 @@ export const deleteCommentToFavourite = (name: string) => {
   };
 };
 
-export const addPostToFavourite = (jsx: JSX.Element) => {
+export const addPostToFavourite = (post: Posts) => {
   return {
     type: ActionType.ADD_POST_TO_FAVOURITE,
-    payload: jsx,
+    payload: post,
   };
 };

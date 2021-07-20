@@ -1,11 +1,13 @@
 //Inner
 import { useTypedSelector } from '../../hooks/useTypedSelectors';
 import { UserComment } from '../../components';
+import { ArticleDetails } from '../start/components/article/articleDetails';
 //Styles
 import { Wrapper } from './Favourite.css';
 
 export const Favourite: React.FC = () => {
   const favComments = useTypedSelector((state) => state.comments.favourite);
+  const favPosts = useTypedSelector((state) => state.articles.favourite);
 
   return (
     <Wrapper>
@@ -22,7 +24,12 @@ export const Favourite: React.FC = () => {
           />
         ))}
       </div>
-      <div className="articles"></div>
+      <div className="articles">
+        <h2>Posts</h2>
+        {favPosts.map((post) => (
+          <ArticleDetails key={post.id} inFavourite={true} />
+        ))}
+      </div>
     </Wrapper>
   );
 };
