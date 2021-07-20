@@ -27,9 +27,9 @@ const initialState = {
   loading: false,
   error: null,
   posts: [],
-};
+} as ArticlesState;
 
-const reducer = (state: ArticlesState = initialState, action: Action) => {
+const reducer = (state = initialState, action: Action) => {
   switch (action.type) {
     case ActionType.FETCH_ARTICLES:
       return {

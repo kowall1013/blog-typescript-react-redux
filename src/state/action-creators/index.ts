@@ -65,3 +65,10 @@ export const deleteCommentToFavourite = (name: string) => {
     payload: name,
   };
 };
+
+export const addPostToFavourite = (jsx: JSX.Element) => {
+  return {
+    type: ActionType.ADD_POST_TO_FAVOURITE,
+    payload: jsx,
+  };
+};

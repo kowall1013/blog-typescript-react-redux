@@ -21,7 +21,7 @@ interface CommentState {
   loading: boolean;
   error: string | null;
   comments: Comment[];
-  favourite: FilteredComment[][];
+  favourite: FilteredComment[];
 }
 
 const initialState = {
@@ -53,14 +53,16 @@ export const commentReducer = (state: CommentState = initialState, action: Actio
         favourite: [],
       };
     case ActionType.ADD_COMMENT_TO_FAVOURITE:
+      console.log('add', state.favourite);
       return {
         ...state,
         favourite: [...state.favourite, action.payload],
       };
     case ActionType.DELETE_COMMENT_FROM_FAVOURITE:
+      console.log('delete', state.favourite);
       return {
         ...state,
-        favourite: [],
+        favourite: state.favourite.filter((item) => item.name !== action.payload),
       };
 
     default:

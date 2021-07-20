@@ -33,12 +33,17 @@ interface FetchCommentErrorAction {
 
 interface AddCommentToFavourite {
   type: ActionType.ADD_COMMENT_TO_FAVOURITE;
-  payload: Comment[];
+  payload: Comment;
 }
 
 interface DeleteCommentFromFavourite {
   type: ActionType.DELETE_COMMENT_FROM_FAVOURITE;
   payload: string;
+}
+
+interface AddPostToFavourire {
+  type: ActionType.ADD_POST_TO_FAVOURITE;
+  payload: JSX.Element;
 }
 
 export type Action =
@@ -49,4 +54,5 @@ export type Action =
   | FetchCommentSuccessAction
   | FetchCommentErrorAction
   | AddCommentToFavourite
-  | DeleteCommentFromFavourite;
+  | DeleteCommentFromFavourite
+  | AddPostToFavourire;
