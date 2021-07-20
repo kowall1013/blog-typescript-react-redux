@@ -11,6 +11,7 @@ import { MdDateRange } from 'react-icons/md';
 import { FaRegComments } from 'react-icons/fa';
 import { BsArrowRight } from 'react-icons/bs';
 
+//Types
 interface Props {
   item: {
     body?: string;
@@ -30,6 +31,8 @@ const imageIndex = (): number => {
 export const Article: React.FC<Props> = ({ item }) => {
   const { body, id, title } = item;
   const imgIndex = imageIndex();
+
+  //display onlu 100 characters of descriptions
   const maxChar = body?.slice(0, 100);
 
   return (

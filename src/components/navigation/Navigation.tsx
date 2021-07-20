@@ -1,6 +1,7 @@
 //Outter
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+
 //Styles and icons
 import { Wrapper } from './Navigation.css';
 import { IoMdClose, IoIosMenu } from 'react-icons/io';
@@ -23,6 +24,7 @@ export const Navigation: React.FC = () => {
     );
   });
 
+  //Deiffrent nav depending on screen size
   const handleScreenSize = () => {
     if (window.innerWidth > 550) {
       setFullScrrenMenuIsOpen(true);

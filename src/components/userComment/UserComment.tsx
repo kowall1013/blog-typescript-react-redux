@@ -11,6 +11,7 @@ import { Wrapper } from './UserComment.css';
 import { AiFillStar } from 'react-icons/ai';
 import { IconContext } from 'react-icons';
 
+//Types
 interface Props {
   body: string;
   email: string;

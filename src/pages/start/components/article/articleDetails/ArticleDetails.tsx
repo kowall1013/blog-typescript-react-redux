@@ -19,13 +19,7 @@ import { FaRegComments } from 'react-icons/fa';
 import { AiFillStar } from 'react-icons/ai';
 import 'react-toastify/dist/ReactToastify.css';
 
-//Generating unique images for articles, because Api NOT PROVIDED any images
-const images = [photo_1, photo_2, photo_3];
-
-const imageIndex = (): number => {
-  return Math.floor(Math.random() * 3);
-};
-
+//Types
 interface Params {
   id: string;
 }
@@ -35,15 +29,24 @@ interface Props {
   idPost?: number;
 }
 
+//Generating unique images for articles, because Api NOT PROVIDED any images
+const images = [photo_1, photo_2, photo_3];
+
+const imageIndex = (): number => {
+  return Math.floor(Math.random() * 3);
+};
+
 export const ArticleDetails = ({ inFavourite, idPost }: Props) => {
   const [isFavouriteCom, setIsFavourite] = useState(false);
 
-  const { addPostToFavourite } = useActions();
+  //react router stuff
   const params: Params = useParams();
   const history = useHistory();
-  const { fetchArticles, fetchComment, deletePostFromFavourite } = useActions();
+
+  //Redus state
   const articles = useTypedSelector((state) => state.articles.posts);
   const comments = useTypedSelector((state) => state.comments.comments);
+  const { fetchArticles, fetchComment, deletePostFromFavourite, addPostToFavourite } = useActions();
 
   //ID query params
   const id = Number(params.id);
@@ -63,6 +66,7 @@ export const ArticleDetails = ({ inFavourite, idPost }: Props) => {
     history.push('/');
   };
 
+  //add post to favourite list
   const handleClick = () => {
     setIsFavourite(!isFavouriteCom);
     addPostToFavourite({
@@ -74,7 +78,9 @@ export const ArticleDetails = ({ inFavourite, idPost }: Props) => {
     isFavouriteCom ? toast.dark('Delete from favourite') : toast.success('Add to favourite');
   };
 
+  //delete post from favourite list
   const handleDeletePost = () => {
+    toast.dark('Delete from favourite');
     deletePostFromFavourite(idPost);
   };
 

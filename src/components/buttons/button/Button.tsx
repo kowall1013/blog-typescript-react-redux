@@ -1,6 +1,7 @@
 //Styles
 import { Wrapper } from './Button.css';
 
+//Types
 interface Props {
   title: string;
   onChange: () => void;
