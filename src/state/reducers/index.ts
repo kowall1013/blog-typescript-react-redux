@@ -3,11 +3,11 @@ import { combineReducers } from 'redux';
 
 //Inner
 import articlesReducer from './articlesReducer';
-import commentsReducer from './commentsReducer';
+import { commentReducer } from './commentsReducer';
 
 const reducers = combineReducers({
   articles: articlesReducer,
-  comments: commentsReducer,
+  comments: commentReducer,
 });
 
 export default reducers;

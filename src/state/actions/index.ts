@@ -1,6 +1,7 @@
 //Inner
 import { ActionType } from '../action-types';
-import { Posts, Post } from '../reducers/articlesReducer';
+import { Posts } from '../reducers/articlesReducer';
+import { Comment } from '../reducers/commentsReducer';
 
 interface FetchArticlesAction {
   type: ActionType.FETCH_ARTICLES;
@@ -22,7 +23,7 @@ interface FetchCommentAction {
 
 interface FetchCommentSuccessAction {
   type: ActionType.FETCH_COMMENT_SUCCESS;
-  payload: Post[];
+  payload: Comment[];
 }
 
 interface FetchCommentErrorAction {
@@ -32,7 +33,12 @@ interface FetchCommentErrorAction {
 
 interface AddCommentToFavourite {
   type: ActionType.ADD_COMMENT_TO_FAVOURITE;
-  payload: Post[];
+  payload: Comment[];
+}
+
+interface DeleteCommentFromFavourite {
+  type: ActionType.DELETE_COMMENT_FROM_FAVOURITE;
+  payload: string;
 }
 
 export type Action =
@@ -42,4 +48,5 @@ export type Action =
   | FetchCommentAction
   | FetchCommentSuccessAction
   | FetchCommentErrorAction
-  | AddCommentToFavourite;
+  | AddCommentToFavourite
+  | DeleteCommentFromFavourite;

@@ -52,9 +52,16 @@ export const fetchComment = (id: number) => {
   };
 };
 
-export const AddCommentToFavourite = (comment: Comment) => {
+export const addCommentToFavourite = (comment: Comment) => {
   return {
     type: ActionType.ADD_COMMENT_TO_FAVOURITE,
     payload: comment,
+  };
+};
+
+export const deleteCommentToFavourite = (name: string) => {
+  return {
+    type: ActionType.DELETE_COMMENT_FROM_FAVOURITE,
+    payload: name,
   };
 };

@@ -5,7 +5,7 @@ import { ThemeProvider } from 'styled-components';
 
 //Inner
 import { store } from './state';
-import { Start, Blog, Podcast, About } from './pages';
+import { Start, Favourite, Podcast, About } from './pages';
 import { Header, Navigation, Logo } from './components';
 
 //Styles
@@ -24,14 +24,14 @@ export function App() {
         </Header>
         <Provider store={store}>
           <Switch>
-            <Route exact path="/posts">
+            <Route exact path="/">
               <Start />
             </Route>
             <Route exact path="/posts/:id">
               <ArticleDetails />
             </Route>
-            <Route path="/blog">
-              <Blog />
+            <Route path="/favourite">
+              <Favourite />
             </Route>
             <Route path="/podcast">
               <Podcast />

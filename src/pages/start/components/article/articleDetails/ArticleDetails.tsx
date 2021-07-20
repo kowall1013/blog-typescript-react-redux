@@ -19,13 +19,6 @@ interface Params {
   id: string;
 }
 
-interface Article {
-  userId: number;
-  id: number;
-  title: string;
-  body: string;
-}
-
 //Generating unique images for articles, because Api NOT PROVIDED any images
 const images = [photo_1, photo_2, photo_3];
 
@@ -38,6 +31,7 @@ export const ArticleDetails = () => {
   const history = useHistory();
   const { fetchArticles, fetchComment } = useActions();
   const articles = useTypedSelector((state) => state.articles.posts);
+
   const comments = useTypedSelector((state) => state.comments.comments);
 
   //ID query params

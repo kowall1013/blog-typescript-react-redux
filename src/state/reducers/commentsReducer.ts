@@ -1,4 +1,5 @@
 //Inner
+import { isTemplateExpression } from 'typescript';
 import { ActionType } from '../action-types';
 import { Action } from '../actions';
 
@@ -10,11 +11,17 @@ export interface Comment {
   email: string;
 }
 
-interface ArticlesState {
+export type FilteredComment = {
+  name: string;
+  body: string;
+  email: string;
+};
+
+interface CommentState {
   loading: boolean;
   error: string | null;
   comments: Comment[];
-  favourite: Comment[][];
+  favourite: FilteredComment[][];
 }
 
 const initialState = {
@@ -24,7 +31,7 @@ const initialState = {
   favourite: [],
 };
 
-const reducer = (state: ArticlesState = initialState, action: Action) => {
+export const commentReducer = (state: CommentState = initialState, action: Action) => {
   switch (action.type) {
     case ActionType.FETCH_COMMENT:
       return {
@@ -36,7 +43,7 @@ const reducer = (state: ArticlesState = initialState, action: Action) => {
         loading: false,
         error: null,
         comments: action.payload,
-        favourite: [],
+        favourite: [...state.favourite],
       };
     case ActionType.FETCH_COMMENT_ERROR:
       return {
@@ -50,10 +57,13 @@ const reducer = (state: ArticlesState = initialState, action: Action) => {
         ...state,
         favourite: [...state.favourite, action.payload],
       };
+    case ActionType.DELETE_COMMENT_FROM_FAVOURITE:
+      return {
+        ...state,
+        favourite: [],
+      };
 
     default:
       return state;
   }
 };
-
-export default reducer;

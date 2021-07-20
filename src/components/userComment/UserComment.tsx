@@ -20,13 +20,11 @@ interface Props {
 
 export const UserComment = ({ body, email, name }: Props) => {
   const [isFavourite, setIsFavourite] = useState(false);
-  const { AddCommentToFavourite } = useActions();
-  const state = useTypedSelector((state) => state);
-  console.log('madafacuka', state);
+  const { addCommentToFavourite, deleteCommentToFavourite } = useActions();
   const handleClick = () => {
     setIsFavourite(!isFavourite);
     isFavourite ? toast.dark('Delete from favourite') : toast.success('Add to favourite');
-    AddCommentToFavourite({ body, email, name });
+    isFavourite ? deleteCommentToFavourite(name) : addCommentToFavourite({ body, email, name });
   };
   return (
     <Wrapper>
